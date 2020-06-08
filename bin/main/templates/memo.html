@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang=ja xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>MESSAGE MEMO</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
+    <link th:href="@{/css/memo.css}" rel="stylesheet" type="text/css">
+</head>
+<body onload="setDate(),setTime();">
+            <div class="bg-success text-black clearfix">
+                <h1 class="float-left text-light"><a href="http://localhost:8080/msgmemo/inputForm" >MESSAGE MEMO</a></h1>
+                <input id="print" type="button" name="print" value="印刷" class="float-right btn btn-primary d-block mt-2 mr-3 mb-2">
+            </div>
+          	<div class="mx-auto" style="width: 750px;">
+  				<h1 id="c-coment"></h1>
+		  	</div>
+      	 	<div class="main" >
+       			<form id="form"  method="post" action="" >
+       		 		<div class="col-10 mx-auto ">
+	           			 <span>
+	                		<input class="mt-4 ml-1 mb-4 form-control-sm" type="text" name="to_user" maxlength="40" required="required">さん宛て
+	           			 </span><br>
+	            		<div id="datem">受電日時</div>
+	            		<div class="date ">
+	                		<span>
+	                   			 <input id="today_year" type="text" size="5" name="today_year" maxlength="4" required="required" oninput="value = value.replace(/[^0-9]+/i,'');">年
+	                   			 <input id="today_month" type="text" size="3" name="today_month" maxlength="2" required="required" oninput="value = value.replace(/[^0-9]+/i,'');">月
+	                   			 <input id="today_day" type="text" size="3" name="today_day" maxlength="2" required="required" oninput="value = value.replace(/[^0-9]+/i,'');">日
+	                		</span>
+	           		 	</div>
+	            		<div class="time float-left ">
+	               			 <ul class="list-unstyled">
+	                    		<li><input id="AM" type="radio" name="radio" value="AM">AM</li>
+	                    		<li><input id="PM" type="radio" name="radio" value="PM">PM</li>
+	               			 </ul>
+	            		</div>
+	           			 <div class="clearfix time2">
+	                		 <select name="hour" id="hour" style="width:60px">
+		                        <option value="1">1</option>
+		                        <option value="2">2</option>
+		                        <option value="3">3</option>
+		                        <option value="4">4</option>
+		                        <option value="5">5</option>
+		                        <option value="6">6</option>
+		                        <option value="7">7</option>
+		                        <option value="8">8</option>
+		                        <option value="9">9</option>
+		                        <option value="10">10</option>
+		                        <option value="11">11</option>
+		                        <option value="12">12</option>
+	                    	</select>
+	                    	<span> 時 </span>
+	                   		 <select name="minute" id="minute" style="width:60px" >
+		                        <option value="0">0</option>
+		                        <option value="1">1</option>
+		                        <option value="2">2</option>
+		                        <option value="3">3</option>
+		                        <option value="4">4</option>
+		                        <option value="5">5</option>
+		                        <option value="6">6</option>
+		                        <option value="7">7</option>
+		                        <option value="8">8</option>
+		                        <option value="9">9</option>
+		                        <option value="10">10</option>
+		                        <option value="11">11</option>
+		                        <option value="12">12</option>
+		                        <option value="13">13</option>
+		                        <option value="14">14</option>
+		                        <option value="15">15</option>
+		                        <option value="16">16</option>
+		                        <option value="17">17</option>
+		                        <option value="18">18</option>
+		                        <option value="19">19</option>
+		                        <option value="20">20</option>
+		                        <option value="21">21</option>
+		                        <option value="22">22</option>
+		                        <option value="23">23</option>
+		                        <option value="24">24</option>
+		                        <option value="25">25</option>
+		                        <option value="26">26</option>
+		                        <option value="27">27</option>
+		                        <option value="28">28</option>
+		                        <option value="29">29</option>
+		                        <option value="30">30</option>
+		                        <option value="31">31</option>
+		                        <option value="32">32</option>
+		                        <option value="33">33</option>
+		                        <option value="34">34</option>
+		                        <option value="35">19</option>
+		                        <option value="36">36</option>
+		                        <option value="37">37</option>
+		                        <option value="38">38</option>
+		                        <option value="39">39</option>
+		                        <option value="40">40</option>
+		                        <option value="41">41</option>
+		                        <option value="42">42</option>
+		                        <option value="43">43</option>
+		                        <option value="44">44</option>
+		                        <option value="45">45</option>
+		                        <option value="46">46</option>
+		                        <option value="47">47</option>
+		                        <option value="48">48</option>
+		                        <option value="49">49</option>
+		                        <option value="50">50</option>
+		                        <option value="51">51</option>
+		                        <option value="52">52</option>
+		                        <option value="53">53</option>
+		                        <option value="54">54</option>
+		                        <option value="55">55</option>
+		                        <option value="56">56</option>
+		                        <option value="57">57</option>
+		                        <option value="58">58</option>
+		                        <option value="59">59</option>
+	                   		 </select>
+	                 		<span> 分</span>
+	            		</div>
+	        			<div id="companyname">会社名</div>
+	            		<div class="company">
+	                		<select name ="company" id="company" style="width:400px" >
+	                    		<option value=""> </option>
+	                    		<option th:each="customer : ${customerlist}" th:value="*{c_num}" th:text="*{c_name}" th:object="${customer}"></option>
+	               			 </select>
+	            		</div>
+	            		<div id="name">氏名</div>
+	            		<div class="name">
+	                		<input type="text" style="width:400px"  name="name" maxlength="40" required="required" >
+	            		</div> 
+	        			<div id="check">対応</div>
+	                	<div id="check2">
+	                        <ul class="list-unstyled list">
+	                            <li class="c1"><input type="checkbox" class="check" name="check1"><span>もう一度お願いします</span></li>
+	                            <li class="c2"><input type="checkbox"  class="check" name="check2"><span>折り返しお願いします</span></li>
+	                            <li class="c3"><input type="checkbox" class="check" name="check3" id="check3" /><span>伝言あります</span></li>
+	                        </ul>
+	               		</div>           
+	            		<div class="memo">
+	                		<textarea id="memo" rows="4" cols="30" name="memo" style="width:400px" readonly required></textarea>
+	            		</div>
+	            		<div id="human">受電者</div>
+	            		<div class="human2">
+	                		<select name ="human2" id="human2" style="width:200px" required="required">
+	                    		<option value=""></option>
+	                   			 <option th:each="employee : ${employeelist}" th:value="*{e_num}" th:text="*{e_name}" th:object="${employee}"></option>
+	                		</select>                    
+	            		</div>
+	            		<div class="form-row text-center botan" >
+	                		<div class="col-12">
+	                    		<input type="submit" class="btn btn-outline-success w-25 mx-auto d-block" value="登録"  onClick="return isCheck()"  >
+	                		</div>
+						</div>
+        			</div>
+        		</form>
+			</div>
+ <script  type="text/javascript" th:src="@{/memo.js}"></script>
+ </body>
+ </html>   
+
+
