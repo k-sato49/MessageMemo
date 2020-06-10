@@ -82,7 +82,7 @@ function ckbox1(){
         let result =obj.checked
         let ob = document.getElementById("memo");
         if(result == true){
-          ob.required = true;  //requiredに設定
+          ob.required = true;  //readonlyに設定
         }else{
           ob.required = false;   //requiredに解除
         }
@@ -105,14 +105,4 @@ function ckbox1(){
     		return false;
     	}
     }
-   
-//    function clickkkk(){
-//        let obj = document.getElementById("check3");
-//        let result =obj.checked
-//        let ob = document.getElementById("memo");
-//        if(result == true){
-//          ob.readOnly = false;  //readonlyを解除
-//        }else{
-//          ob.readOnly = true;   //readonlyに設定
-//        }
-//    }
+    
