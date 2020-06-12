@@ -7,35 +7,45 @@
     <link th:href="@{/css/memo.css}" rel="stylesheet" type="text/css">
 </head>
 <body onload="setDate(),setTime();">
+          <header>  
             <div class="bg-success text-black clearfix">
                 <h1 class="float-left text-light"><a href="http://localhost:8080/msgmemo/inputForm" >MESSAGE MEMO</a></h1>
                 <input id="print" type="button" name="print" value="印刷" class="float-right btn btn-primary d-block mt-2 mr-3 mb-2">
             </div>
+           </header> 
           	<div class="mx-auto" style="width: 750px;">
   				<h1 id="c-coment"></h1>
 		  	</div>
+		  	<div class="mx-auto" style="width: 750px;"><h2 id="msg-coment" th:text="${msg}"></h2></div>
       	 	<div class="main" >
-       			<form id="form"  method="post" action="" >
+       			<form id="form"  method="post" action="/msgmemo/inputForm" >
        		 		<div class="col-10 mx-auto ">
 	           			 <span>
 	                		<input class="mt-4 ml-1 mb-4 form-control-sm" type="text" name="to_name" maxlength="40" required="required">さん宛て
 	           			 </span><br>
-	            		<div id="datem">受電日時</div>
-	            		<div class="date ">
-	                		<span>
-	                   			 <input id="today_year" type="text" size="5" name="receiv_time" maxlength="4" required="required" oninput="value = value.replace(/[^0-9]+/i,'');">年
-	                   			 <input id="today_month" type="text" size="3" name="receiv_time" maxlength="2" required="required" oninput="value = value.replace(/[^0-9]+/i,'');">月
-	                   			 <input id="today_day" type="text" size="3" name="receiv_time" maxlength="2" required="required" oninput="value = value.replace(/[^0-9]+/i,'');">日
-	                		</span>
+	            		<div class="row">
+							<div class="col-8 text-center">
+			                <p>受電日時</p>
+			            	</div>
+						</div>
+	            		<div class="form-row text-center">
+	            			<div  class="col-12">
+		                		<span>
+		                   			 <input id="today_year" type="text" size="5" name="receiv_time[]" maxlength="4" required="required" oninput="value = value.replace(/[^0-9]+/i,'');">年
+		                   			 <input id="today_month" type="text" size="3" name="receiv_time[]" maxlength="2" required="required" oninput="value = value.replace(/[^0-9]+/i,'');">月
+		                   			 <input id="today_day" type="text" size="3" name="receiv_time[]" maxlength="2" required="required" oninput="value = value.replace(/[^0-9]+/i,'');">日
+		                		</span>
+	                		</div>
 	           		 	</div>
-	            		<div class="time float-left ">
-	               			 <ul class="list-unstyled">
-	                    		<li><input id="AM" type="radio" name="receiv_time" value="AM">AM</li>
-	                    		<li><input id="PM" type="radio" name="receiv_time" value="PM">PM</li>
-	               			 </ul>
-	            		</div>
-	           			 <div class="clearfix time2">
-	                		 <select name="receiv_time" id="hour" style="width:60px">
+	            		<div class="row">
+							<div class="col-5 pt-3 text-right">
+		               			 <ul class="list-unstyled">
+		                    		<li><input id="AM" type="radio" name="receiv_time[]" value="AM">AM</li>
+		                    		<li><input id="PM" type="radio" name="receiv_time[]" value="PM">PM</li>
+		               			 </ul>
+		            		</div>
+	           			  <div class="col-7 pt-4 pl-5">
+	                		 <select name="receiv_time[]" id="hour" style="width:60px">
 		                        <option value="1">1</option>
 		                        <option value="2">2</option>
 		                        <option value="3">3</option>
@@ -50,7 +60,7 @@
 		                        <option value="12">12</option>
 	                    	</select>
 	                    	<span> 時 </span>
-	                   		 <select name="receiv_time" id="minute" style="width:60px" >
+	                   		 <select name="receiv_time[]" id="minute" style="width:60px" >
 		                        <option value="0">0</option>
 		                        <option value="1">1</option>
 		                        <option value="2">2</option>
@@ -114,34 +124,61 @@
 	                   		 </select>
 	                 		<span> 分</span>
 	            		</div>
-	        			<div id="companyname">会社名</div>
-	            		<div class="company">
-	                		<select name ="custmer_cd" id="company" style="width:400px" >
+	            		</div>
+	        			<div class="row">
+						<div class="col-8 text-center">
+			                <p>会社名</p>
+			            </div>
+					</div>
+	            		<div class="form-row text-center">
+	            		<div  class="col-12">
+	                		<select name ="custmer_cd" id="company" style="width:290px" >
 	                    		<option value=""> </option>
 	                    		<option th:each="customer : ${customerlist}" th:value="*{c_num}" th:text="*{c_name}" th:object="${customer}"></option>
 	               			 </select>
 	            		</div>
-	            		<div id="name">氏名</div>
-	            		<div class="name2">
-	                		<input type="text" name="sender" style="width:400px"  maxlength="40" required="required" >
-	            		</div> 
-	        			<div id="check">対応</div>
-	                	<div id="check4">
-	                        <ul class="list-unstyled list">
-	                            <li class="c1"><input type="checkbox" class="check" name="message_cd" id="check1"><span>もう一度お願いします</span></li>
-	                            <li class="c2"><input type="checkbox"  class="check" name="message_cd" id="check2"><span>折り返しお願いします</span></li>
-	                            <li class="c3"><input type="checkbox" class="check" name="message_cd" id="check3" ><span>伝言あります</span></li>
-	                        </ul>
-	               		</div>           
-	            		<div class="memo">
-	                		<textarea id="memo" rows="4" cols="30" name="memo" style="width:400px" readonly required></textarea>
 	            		</div>
-	            		<div id="human">受電者</div>
-	            		<div class="human2">
-	                		<select name ="receiver_cd" id="human2" style="width:200px" required="required">
-	                    		<option value=""></option>
-	                   			 <option th:each="employee : ${employeelist}" th:value="*{e_num}" th:text="*{e_name}" th:object="${employee}"></option>
-	                		</select>                    
+	            		<div class="row">
+						<div class="col-8 text-center">
+			                <p>氏名</p>
+			            </div>
+					</div>
+	            		<div class="form-row text-center">
+	            		<div  class="col-12">
+	                		<input type="text" name="sender" style="width:290px"  maxlength="40" required="required" >
+	            		</div> 
+	            		</div>
+	        			<div class="row">
+						<div class="col-8 text-center">
+			                <p>対応</p>
+			            </div>
+					</div>
+	                	<div class="form-row text-center">
+		            		<div  class="col-10">
+		                        <ul class="list-unstyled list">
+		                            <li class="c1"><input type="checkbox" class="check" name="message_cd" id="check1" value="1"><label>もう一度お願いします</label></li>
+		                            <li class="c2"><input type="checkbox"  class="check" name="message_cd" id="check2" value="2"><label>折り返しお願いします</label></li>
+		                            <li class="pr-3 mr-5"><input type="checkbox" class="check" name="message_cd" id="check3" value="3"><label>伝言あります</label></li>
+		                        </ul>
+		               		</div>   
+	               		</div>        
+	            		<div class="form-row text-center">
+		            		<div  class="col-12">
+		                		<textarea id="memo" rows="4" cols="30" name="memo" style="width:310px" readonly required></textarea>
+		            		</div>
+	            		</div>
+	            		<div class="row">
+							<div class="col-8 text-center">
+				                <p>受電者</p>
+				            </div>
+						</div>
+	            		<div class="form-row text-center">
+	            			<div  class="col-11 mb-4">
+		                		<select name ="receiver_cd" id="human2" style="width:200px" required="required">
+		                    		<option value=""></option>
+		                   			 <option th:each="employee : ${employeelist}" th:value="*{e_num}" th:text="*{e_name}" th:object="${employee}"></option>
+		                		</select>                    
+	            			</div>
 	            		</div>
 	            		<div class="form-row text-center botan" >
 	                		<div class="col-12">

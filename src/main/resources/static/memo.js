@@ -89,6 +89,7 @@ function ckbox1(){
     }
     
     function isCheck() {
+    	document.getElementById("msg-coment").innerHTML="";
     	var arr_check = document.getElementsByClassName("check");
     	var count = 0;
     	for (var i = 0; i < arr_check.length; i++) {

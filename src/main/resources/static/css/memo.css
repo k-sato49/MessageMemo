@@ -4,82 +4,22 @@ a {
   text-decoration: none;
 }
 a:hover { color: white;}
-#datem{padding-left: 200px;
-	   padding-top:16px;
-}
-.date{
-    margin-left:250px;
-    padding-top:16px;
-    padding-bottom:10px;
-}
 
-.time{
-	margin-left:300px;
-    padding-top:10px;
-    padding-bottom:5px;
-}
 
-.time2{
-	padding-left: 380px;
-	padding-right: 30px;
-    padding-top:16px;
-}
 
-#companyname{
-	padding-left: 200px;
-}
-.company{
-	margin-left:250px;
-    padding-top:10px;
-    padding-bottom:20px;
-}
-
-#name{
-	padding-left:200px;
-}
-
-.name2{
-	margin-left:250px;
-    padding-top:10px;
-    padding-bottom:20px;
-}
-#check{
-	padding-left:200px;
-}
-
-#check4{
-	margin-left:250px;
-    padding-top:10px;
-    padding-bottom:10px;
-}
 
 ul.list li{
 	margin-bottom:10px;
 }
 
-.memo{
-	margin-left:250px;
-    padding-top:10px;
-    padding-bottom:20px;
-}
-
-#human{
-	padding-left:200px;
-}
-
-.human2{
-	margin-left:250px;
-    padding-bottom:20px;
-    padding-top:10px;
-}
-
 .main{
 	background-color:#EEEEEE;
-	margin-right:150px;
-	margin-left:150px;
-	margin-top:50px;
-	margin-bottom:50px;
+	margin-right:10%;
+	margin-left:10%;
+	margin-top:2%;
+	margin-bottom:2%;
 }
+
 
 .botan{
 	padding-bottom:15px;

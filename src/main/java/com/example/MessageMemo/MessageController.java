@@ -5,11 +5,15 @@ import java.sql.Timestamp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+//import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import java.text.SimpleDateFormat;        //SimpleDataFormatクラスをインポート
+import java.text.ParseException; //try-catch構文で使うもの
+import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 
 
 
@@ -22,7 +26,8 @@ private CustomerRepository customerRepository;
 private EmployeeRepository employeeRepository;
 	@Autowired
 private MessageRepository messageRepository;
-	
+	@Autowired
+private MessageRepository rep;
  
 	@RequestMapping("/msgmemo/inputForm")
     
@@ -39,31 +44,77 @@ private MessageRepository messageRepository;
 			model.addAttribute("employeelist",employeeList);
 			return "memo";
 		}
-	@PostMapping(path="/")
-	public @ResponseBody String addNewMessage(	  @RequestParam int m_id
+	
+	@PostMapping(path="/msgmemo/inputForm")
+	public  String addNewMessage(	  Model model
 												, @RequestParam String to_name
 												, @RequestParam String receiver_cd
-												, @RequestParam Timestamp receiver_time
 												, @RequestParam String custmer_cd
 												, @RequestParam String sender
 												, @RequestParam String message_cd
-												, @RequestParam String memo) {
+												, @RequestParam String memo
+												, HttpServletRequest request)throws ParseException {
+		int cnt =rep.countt_message();
+		
+		int m_id;
+		if(cnt == 0) {
+			m_id= 1;
+		}else {
+			m_id= cnt+1;
+		}
+		
+		
 		
 		Message messageAddData = new Message();
-		messageAddData.setAll(m_id,to_name,receiver_cd,receiver_time,custmer_cd,sender,message_cd,memo);
-		
+		messageAddData.setAll(m_id,to_name,receiver_cd,custmer_cd,sender,message_cd,memo);
+		 try{        //try文
+			 String[] receiv_time = request.getParameterValues("receiv_time[]");
+             SimpleDateFormat sdf =new SimpleDateFormat("yyyy/MM/ddhh:mm");
+          if(receiv_time[3].equals("AM")){
+        	  String str = receiv_time[0] +"/"+receiv_time[1]+"/"+receiv_time[2] + receiv_time[4] +":"+receiv_time[5] ;
+        	  Date date =sdf.parse(str);
+        	  Timestamp ts = new Timestamp(date.getTime());
+        	  messageAddData.setReceiv_time(ts); 
+          }else {
+        	  int pm_time = Integer.parseInt(receiv_time[4])+12;
+        	  String change_time = String.valueOf(pm_time);   
+        	  String str = receiv_time[0] + "/" +  receiv_time[1] + "/" + receiv_time[2] + change_time + ":" + receiv_time[5] ;
+        	  Date date = sdf.parse(str);
+				Timestamp ts = new Timestamp(date.getTime());
+				messageAddData.setReceiv_time(ts);
+          }
+		 }catch(NullPointerException e) {
+			System.out.println("例外が発生しました");
+		} 
+		  
+          
+		model.addAttribute("msg", to_name + "さん宛てのメッセージを登録しました。"); 
+    
 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 		messageAddData.setCreate_date(timestamp);
-		messageAddData.setCreate_user("auto_system");
+		messageAddData.setCreate_user("springuser");
 		messageAddData.setUpdate_date(timestamp);
-		messageAddData.setUpdate_user("auto_system");
+		messageAddData.setUpdate_user("springuser");
+		
+	
 		
 		messageRepository.save(messageAddData);
+
+		  
+
+		// モデルに属性追加
+		Iterable<Customer> customerList = customerRepository.findAll();
 		
-		return memo;
+		model.addAttribute("customerlist",customerList);
+		
+		Iterable<Employee> employeeList = employeeRepository.findAll();
+		
+		// モデルに属性追加
+		model.addAttribute("employeelist",employeeList);
+		return "memo";
 	}
        	
-	}	
+}		
 	
 	
 	
