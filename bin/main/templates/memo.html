@@ -7,17 +7,21 @@
     <link th:href="@{/css/memo.css}" rel="stylesheet" type="text/css">
 </head>
 <body onload="setDate(),setTime();">
+          <!-- 初期画面のURLのリンク付きMESSAGE MEMOの作成、jsで印刷ボタンの作成 -->
           <header>  
             <div class="bg-success text-black clearfix">
                 <h1 class="float-left text-light"><a href="http://localhost:8080/msgmemo/inputForm" >MESSAGE MEMO</a></h1>
                 <input id="print" type="button" name="print" value="印刷" class="float-right btn btn-primary d-block mt-2 mr-3 mb-2">
             </div>
            </header> 
+          	<!-- 対応のチェックボックスが選択されて無い状態で登録を押下された場合に上部にコメント出現 -->
           	<div class="mx-auto" style="width: 750px;">
   				<h1 id="c-coment"></h1>
 		  	</div>
+		  	<!-- 登録処理が終わった際に上部にメッセージを出現 -->
 		  	<div class="mx-auto" style="width: 750px;"><h2 id="msg-coment" th:text="${msg}"></h2></div>
       	 	<div class="main" >
+       			<!-- idをformに設定、 -->
        			<form id="form"  method="post" action="/msgmemo/inputForm" >
        		 		<div class="col-10 mx-auto ">
 	           			 <span>
@@ -40,8 +44,8 @@
 	            		<div class="row">
 							<div class="col-5 pt-3 text-right">
 		               			 <ul class="list-unstyled">
-		                    		<li><input id="AM" type="radio" name="receiv_time[]" value="AM">AM</li>
-		                    		<li><input id="PM" type="radio" name="receiv_time[]" value="PM">PM</li>
+		                    		<li><input id="AM" type="radio" name="receiv_time[]" value="AM" required="required">AM</li>
+		                    		<li><input id="PM" type="radio" name="receiv_time[]" value="PM" required="required">PM</li>
 		               			 </ul>
 		            		</div>
 	           			  <div class="col-7 pt-4 pl-5">

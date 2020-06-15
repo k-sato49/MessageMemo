@@ -12,27 +12,28 @@ import javax.persistence.Table;
 //Customerクラス作成
 public class Message {
 	@Id
-	//カラム名C_CD作成　文字列型c_num
+	//カラム名M_ID作成　int列型m_id
 	@Column(name="M_ID" ,nullable = false ,columnDefinition = "int(11)")
 	private int m_id;
-	//カラム名C_NAME作成　文字列型c_name
+	//カラム名TO_NAME作成　文字列型to_name
 	@Column(name="TO_NAME" ,nullable = false ,columnDefinition = "VARCHAR(40)")
 	private String to_name;
-	//カラム名ADDRESS作成　文字列型address
+	//カラム名RECEIVER_CD作成　文字列型receiver_cd
 	@Column(name="RECEIVER_CD" ,nullable = false ,columnDefinition = "VARCHAR(5)")
 	private String receiver_cd;
-	//カラム名TEL作成　文字列型TEL
+	//カラム名RECEIV_TIME作成　Timestamp型receiv_time
 	@Column(name="RECEIV_TIME" ,nullable = false ,columnDefinition = "datetime")
 	private Timestamp receiv_time; 
+	//カラム名CUSTMER_CD作成　文字列型custmer_cd
 	@Column(name="CUSTMER_CD" ,columnDefinition = "VARCHAR(4)")
 	private String custmer_cd;
-	//カラム名C_NAME作成　文字列型c_name
+	//カラム名SENDER作成　文字列型sender
 	@Column(name="SENDER" ,nullable = false ,columnDefinition = "VARCHAR(40)")
 	private String sender;
-	//カラム名ADDRESS作成　文字列型address
+	//カラム名MESSAGE_CD作成　文字列型message_cd
 	@Column(name="MESSAGE_CD" ,nullable = false ,columnDefinition = "char(1)")
 	private String message_cd;
-	//カラム名TEL作成　文字列型TEL
+	//カラム名MEMO作成　文字列型memo
 	@Column(name="MEMO" ,columnDefinition = "VARCHAR(256)")
 	private String memo; 
 	//カラム名UPDATE_DATE作成　timestamp型（日付と時刻の格納）update_date
@@ -48,74 +49,74 @@ public class Message {
 	@Column(name="CREATE_USER" ,columnDefinition = "VARCHAR(40)")
 	//フィールドにcreat_userを作成
 	private String create_user;
-	//C_numの値を取得
+	//M_idの値を取得
 	public int getM_id() {
 		return m_id;
 	}
-	//C_numの値を設定
+	//M_idの値を設定
 	public void setM_id(int m_id) {
 		this.m_id = m_id;
 	}
-	//C_ameの値を取得
+	//To_nameの値を取得
 	public String getTo_name() {
 		return to_name;
 	}
-	//C_nameの値を設定
-	public void setC_name(String to_name) {
+	//To_nameの値を設定
+	public void setTo_name(String to_name) {
 		this.to_name = to_name;
 	}
-	//Addressの値を取得
+	//Receiver_cdの値を取得
 	public String getReceiver_cd() {
 		return receiver_cd;
 	}
-	//Addressの値を設定
+	//Receiver_cdの値を設定
 	public void setReceiver_cd(String receiver_cd) {
 		this.receiver_cd = receiver_cd;
 	}
-	//Telの値を取得
+	//Receiv_timeの値を取得
 	public Timestamp getReceiv_time() {
 		return receiv_time;
 	}
-	//Telの値を設定
+	//Receiv_timeの値を設定
 	public void setReceiv_time(Timestamp receiv_time) {
 		this.receiv_time = receiv_time;
 	}	
+	//Custmer_cdの値を取得
 	public String getCustmer_cd() {
 		return custmer_cd;
 	}
-	//C_numの値を設定
+	//Custmer_cdの値を設定
 	public void seCustmer_cd(String custmer_cd) {
 		this.custmer_cd = custmer_cd;
 	}
-	//C_ameの値を取得
+	//Senderの値を取得
 	public String getSender() {
 		return sender;
 	}
-	//C_nameの値を設定
+	//Senderの値を設定
 	public void setSender(String sender) {
 		this.sender = sender;
 	}
-	//Addressの値を取得
+	//Message_cdの値を取得
 	public String getMessage_cd() {
 		return message_cd;
 	}
-	//Addressの値を設定
+	//Message_cdの値を設定
 	public void setMessage_cd(String message_cd) {
 		this.message_cd = message_cd;
 	}
-	//Telの値を取得
+	//Memoの値を取得
 	public String getMemo() {
 		return memo;
 	}
-	//Telの値を設定
+	//Memoの値を設定
 	public void setMemo(String memo) {
 		this.memo = memo;
 	}
-	//c_num,c_name,address,telの値を設定
+	//m_id,to_name,receiver_cd,custmer_cd,sender,message_cd,memoの値を設定
 	public void setAll(  int m_id
 						,String to_name
 						,String receiver_cd
-						//,Timestamp receiv_time
 						,String custmer_cd
 						,String sender
 						,String message_cd
@@ -124,7 +125,6 @@ public class Message {
 		this.m_id = m_id;
 		this.to_name = to_name;
 		this.receiver_cd = receiver_cd;
-		//this.receiv_time = receiv_time;
 		this.custmer_cd = custmer_cd;
 		this.sender = sender;
 		this.message_cd = message_cd;

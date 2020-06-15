@@ -9,7 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+//import org.springframework.web.bind.annotation.ResponseBody;
 import java.text.SimpleDateFormat;        //SimpleDataFormatクラスをインポート
 import java.text.ParseException; //try-catch構文で使うもの
 import javax.servlet.http.HttpServletRequest;
@@ -38,13 +38,14 @@ private MessageRepository rep;
 			// モデルに属性追加
 			model.addAttribute("customerlist",customerList);
 			
+			//M_EMPLOYEEテーブルの全データうを取得
 			Iterable<Employee> employeeList = employeeRepository.findAll();
 			
 			// モデルに属性追加
 			model.addAttribute("employeelist",employeeList);
 			return "memo";
 		}
-	
+	//リンク先
 	@PostMapping(path="/msgmemo/inputForm")
 	public  String addNewMessage(	  Model model
 												, @RequestParam String to_name
@@ -54,6 +55,7 @@ private MessageRepository rep;
 												, @RequestParam String message_cd
 												, @RequestParam String memo
 												, HttpServletRequest request)throws ParseException {
+//自動採番に必要　m_idが0の時は1にする、それ以降は+1していく	
 		int cnt =rep.countt_message();
 		
 		int m_id;
@@ -67,6 +69,8 @@ private MessageRepository rep;
 		
 		Message messageAddData = new Message();
 		messageAddData.setAll(m_id,to_name,receiver_cd,custmer_cd,sender,message_cd,memo);
+		
+		//Timestamp型を適切な型に変える
 		 try{        //try文
 			 String[] receiv_time = request.getParameterValues("receiv_time[]");
              SimpleDateFormat sdf =new SimpleDateFormat("yyyy/MM/ddhh:mm");
@@ -87,7 +91,7 @@ private MessageRepository rep;
 			System.out.println("例外が発生しました");
 		} 
 		  
-          
+        //登録処理が実行された場合、上部にさん宛てに入れた名前＋  さん宛てのメッセージを登録しました。と表示
 		model.addAttribute("msg", to_name + "さん宛てのメッセージを登録しました。"); 
     
 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());

@@ -37,7 +37,9 @@ function setTime() {
         window.print();  
 }
 
-//ちえっく単品
+//チェックを１つだけ押す
+//メモの非活性を解除
+//メモの初期値をリセット
 function checkbox(){
     document.forms['form'].elements['check1'].onclick=ckbox1;
     document.forms['form'].elements['check2'].onclick=ckbox2;
@@ -76,7 +78,7 @@ function ckbox1(){
           ob.readOnly = true;   //readonlyに設定
         }
     }
-
+//伝言ありますにチェックされた状態でメモが記入されてなければ必須
     function changerequired(){
         let obj = document.getElementById("check3");
         let result =obj.checked
@@ -87,7 +89,8 @@ function ckbox1(){
           ob.required = false;   //requiredに解除
         }
     }
-    
+ //登録ボタン押下時に登録しましたの文字を消す
+ //登録ボタン押下時にチェックボックスにチェックされていなければ"対応のいずれかをチェックしてください"を表記
     function isCheck() {
     	document.getElementById("msg-coment").innerHTML="";
     	var arr_check = document.getElementsByClassName("check");
@@ -106,4 +109,8 @@ function ckbox1(){
     		return false;
     	}
     }
+    
+   
+    
+    //JavaScriptの名前を変更を変更しJavaScriptの機能を一時停止させる
     
