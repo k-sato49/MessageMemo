@@ -111,7 +111,7 @@ function ckbox1(){
     	}
     }
     
-   
+ 
     
     //JavaScriptの名前を変更を変更しJavaScriptの機能を一時停止させる
     
