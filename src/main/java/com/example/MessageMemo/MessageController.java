@@ -31,20 +31,20 @@ private MessageRepository rep;
  
 	@RequestMapping("/msgmemo/inputForm")
     
-		public String memo(Model model) {
+	public String memo(Model model) {
 			// M_CUSTOMERテーブルの全データを取得
-			Iterable<Customer> customerList = customerRepository.findAll();
+		Iterable<Customer> customerList = customerRepository.findAll();
 			
 			// モデルに属性追加
-			model.addAttribute("customerlist",customerList);
+		model.addAttribute("customerlist",customerList);
 			
 			//M_EMPLOYEEテーブルの全データうを取得
-			Iterable<Employee> employeeList = employeeRepository.findAll();
+		Iterable<Employee> employeeList = employeeRepository.findAll();
 			
 			// モデルに属性追加
-			model.addAttribute("employeelist",employeeList);
-			return "memo";
-		}
+		model.addAttribute("employeelist",employeeList);
+		return "memo";
+	}
 	//リンク先
 	@PostMapping(path="/msgmemo/inputForm")
 	public  String addNewMessage(	  Model model

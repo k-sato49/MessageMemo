@@ -7,7 +7,7 @@
     <link th:href="@{/css/memo.css}" rel="stylesheet" type="text/css">
 </head>
 <body onload="setDate(),setTime();">
-          <!-- 初期画面のURLのリンク付きMESSAGE MEMOの作成、jsで印刷ボタンの作成 -->
+          <!-- 初期画面のURLのリンク付きMESSAGE MEMOの作成、JavaScriptで印刷ボタンの作成 -->
           <header>  
             <div class="bg-success text-black clearfix">
                 <h1 class="float-left text-light"><a href="http://localhost:8080/msgmemo/inputForm" >MESSAGE MEMO</a></h1>
@@ -17,9 +17,9 @@
           	<!-- 対応のチェックボックスが選択されて無い状態で登録を押下された場合に上部にコメント出現 -->
           	<div class="mx-auto" style="width: 750px;">
   				<h1 id="c-coment"></h1>
-		  	</div>
+		  	
 		  	<!-- 登録処理が終わった際に上部にメッセージを出現 -->
-		  	<div class="mx-auto" style="width: 750px;"><h2 id="msg-coment" th:text="${msg}"></h2></div>
+		  	<h2 id="msg-coment" th:text="${msg}"></h2></div>
       	 	<div class="main" >
        			<!-- idをformに設定、 -->
        			<form id="form"  method="post" action="/msgmemo/inputForm" >
@@ -48,6 +48,7 @@
 		                    		<li><input id="PM" type="radio" name="receiv_time[]" value="PM" required="required">PM</li>
 		               			 </ul>
 		            		</div>
+		            		<!-- リストボックス　システム時間 -->
 	           			  <div class="col-7 pt-4 pl-5">
 	                		 <select name="receiv_time[]" id="hour" style="width:60px">
 		                        <option value="1">1</option>
@@ -100,7 +101,7 @@
 		                        <option value="32">32</option>
 		                        <option value="33">33</option>
 		                        <option value="34">34</option>
-		                        <option value="35">19</option>
+		                        <option value="35">35</option>
 		                        <option value="36">36</option>
 		                        <option value="37">37</option>
 		                        <option value="38">38</option>
@@ -168,7 +169,7 @@
 	               		</div>        
 	            		<div class="form-row text-center">
 		            		<div  class="col-12">
-		                		<textarea id="memo" rows="4" cols="30" name="memo" style="width:310px" readonly required></textarea>
+		                		<textarea id="memo" rows="4" cols="30" name="memo" style="width:310px" readonly required maxlength="256"></textarea>
 		            		</div>
 	            		</div>
 	            		<div class="row">

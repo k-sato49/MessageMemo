@@ -65,6 +65,7 @@ function ckbox1(){
     changeReadOnly();
     changerequired();
  }
+ //チェックボックスが選択されたとき強制的に起こる
   window.addEventListener('DOMContentLoaded',checkbox,false);
 
 //「伝言あります」にチェックされた場合、入力可能

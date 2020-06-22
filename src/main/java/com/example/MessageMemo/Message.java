@@ -12,7 +12,7 @@ import javax.persistence.Table;
 //Customerクラス作成
 public class Message {
 	@Id
-	//カラム名M_ID作成　int列型m_id
+	//カラム名M_ID作成　int型m_id
 	@Column(name="M_ID" ,nullable = false ,columnDefinition = "int(11)")
 	private int m_id;
 	//カラム名TO_NAME作成　文字列型to_name
