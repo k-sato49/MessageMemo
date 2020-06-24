@@ -1,0 +1,18 @@
+@charset "UTF-8";
+
+a {
+  color: white;
+  text-decoration: none;
+}
+a:hover { color: white;}
+
+
+.main{
+	background-color:#EEEEEE;
+
+	height:750px;
+	margin-right:7%;
+	margin-left:7%;
+	margin-top:3%;
+	margin-bottom:2%;
+}

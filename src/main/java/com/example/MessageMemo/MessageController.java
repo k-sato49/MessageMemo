@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 //import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,7 +29,9 @@ private EmployeeRepository employeeRepository;
 private MessageRepository messageRepository;
 	@Autowired
 private MessageRepository rep;
- 
+//	@Autowired
+//private HistoryRepository historyRepository;
+	
 	@RequestMapping("/msgmemo/inputForm")
     
 	public String memo(Model model) {
@@ -45,16 +48,32 @@ private MessageRepository rep;
 		model.addAttribute("employeelist",employeeList);
 		return "memo";
 	}
+	
 	//リンク先
 	@PostMapping(path="/msgmemo/inputForm")
 	public  String addNewMessage(	  Model model
 												, @RequestParam String to_name
 												, @RequestParam String receiver_cd
 												, @RequestParam String custmer_cd
+												, @RequestParam String today_year
+												, @RequestParam String today_month
+												, @RequestParam String today_day
+												, @RequestParam (value="radio",required=false)int radio
+												, @RequestParam String hour
+												, @RequestParam String minute
 												, @RequestParam String sender
 												, @RequestParam String message_cd
 												, @RequestParam String memo
 												, HttpServletRequest request)throws ParseException {
+		if(radio == 1) {
+			int h = Integer.parseInt(hour);
+			h = h + 12;
+			hour = String.valueOf(h);
+		}else if (radio == 0) {
+			int h = Integer.parseInt(hour);
+			hour = String.valueOf(h);
+		}
+		
 //自動採番に必要　m_idが0の時は1にする、それ以降は+1していく	
 		int cnt =rep.countt_message();
 		
@@ -71,22 +90,14 @@ private MessageRepository rep;
 		messageAddData.setAll(m_id,to_name,receiver_cd,custmer_cd,sender,message_cd,memo);
 		
 		//Timestamp型を適切な型に変える
-		 try{        //try文
-			 String[] receiv_time = request.getParameterValues("receiv_time[]");
-             SimpleDateFormat sdf =new SimpleDateFormat("yyyy/MM/ddhh:mm");
-          if(receiv_time[3].equals("AM")){
-        	  String str = receiv_time[0] +"/"+receiv_time[1]+"/"+receiv_time[2] + receiv_time[4] +":"+receiv_time[5] ;
-        	  Date date =sdf.parse(str);
-        	  Timestamp ts = new Timestamp(date.getTime());
-        	  messageAddData.setReceiv_time(ts); 
-          }else {
-        	  int pm_time = Integer.parseInt(receiv_time[4])+12;
-        	  String change_time = String.valueOf(pm_time);   
-        	  String str = receiv_time[0] + "/" +  receiv_time[1] + "/" + receiv_time[2] + change_time + ":" + receiv_time[5] ;
-        	  Date date = sdf.parse(str);
-				Timestamp ts = new Timestamp(date.getTime());
-				messageAddData.setReceiv_time(ts);
-          }
+		try {
+			SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+			String str = today_year + "-" + today_month + "-" + today_day + " " + hour + ":" + minute;
+			Date date = sdFormat.parse(str);
+			Timestamp ts = new Timestamp(date.getTime());
+			messageAddData.setReceiv_time(ts); 
+			
+
 		 }catch(NullPointerException e) {
 			System.out.println("例外が発生しました");
 		} 
@@ -117,7 +128,39 @@ private MessageRepository rep;
 		model.addAttribute("employeelist",employeeList);
 		return "memo";
 	}
-       	
+	@RequestMapping("/msgmemo/history")
+    public String history() {
+		// データ登録画面を表示
+        return "history";
+    }
+
+	@GetMapping(path="/msgmemo/history") 
+	public String history(Model model) {
+			// M_CUSTOMERテーブルの全データを取得
+		Iterable<Customer> customerList = customerRepository.findAll();
+			
+		// モデルに属性追加
+		model.addAttribute("customerlist",customerList);
+			
+			//M_EMPLOYEEテーブルの全データうを取得
+		Iterable<Employee> employeeList = employeeRepository.findAll();
+			
+			// モデルに属性追加
+		model.addAttribute("employeelist",employeeList);
+		
+		Iterable<Message> messageList = messageRepository.findAll();
+		
+		model.addAttribute("messagelist",messageList);
+		
+		//Iterable<History> historyList = HistoryRepository.findAll();
+//		
+//		// モデルに属性追加
+	//model.addAttribute("historylist",historyList);
+		
+	return "history";
+	}
+
+	
 }		
 	
 	

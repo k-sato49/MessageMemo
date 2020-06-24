@@ -35,22 +35,22 @@
 	            		<div class="form-row text-center">
 	            			<div  class="col-12">
 		                		<span>
-		                   			 <input id="today_year" type="text" size="5" name="receiv_time[]" maxlength="4" required="required"  pattern="\d{1,4}" >年
-		                   			 <input id="today_month" type="text" size="3" name="receiv_time[]" maxlength="2" required="required" pattern="\d{1,2}">月
-		                   			 <input id="today_day" type="text" size="3" name="receiv_time[]" maxlength="2" required="required" pattern="\d{1,2}">日
+		                   			 <input id="today_year" type="text" size="5" name="today_year" maxlength="4" required="required"  pattern="\d{1,4}" >年
+		                   			 <input id="today_month" type="text" size="3" name="today_month" maxlength="2" required="required" pattern="\d{1,2}">月
+		                   			 <input id="today_day" type="text" size="3" name="today_day" maxlength="2" required="required" pattern="\d{1,2}">日
 		                		</span>
 	                		</div>
 	           		 	</div>
 	            		<div class="row">
 							<div class="col-5 pt-3 text-right">
 		               			 <ul class="list-unstyled">
-		                    		<li><input id="AM" type="radio" name="receiv_time[]" value="AM" required="required">AM</li>
-		                    		<li><input id="PM" type="radio" name="receiv_time[]" value="PM" required="required">PM</li>
+		                    		<li><input id="AM" type="radio" name="radio" value="0" required="required">AM</li>
+		                    		<li><input id="PM" type="radio" name="radio" value="1" required="required">PM</li>
 		               			 </ul>
 		            		</div>
 		            		<!-- リストボックス　システム時間 -->
 	           			  <div class="col-7 pt-4 pl-5">
-	                		 <select name="receiv_time[]" id="hour" style="width:60px">
+	                		 <select name="hour" id="hour" style="width:60px">
 		                        <option value="1">1</option>
 		                        <option value="2">2</option>
 		                        <option value="3">3</option>
@@ -65,7 +65,7 @@
 		                        <option value="12">12</option>
 	                    	</select>
 	                    	<span> 時 </span>
-	                   		 <select name="receiv_time[]" id="minute" style="width:60px" >
+	                   		 <select name="minute" id="minute" style="width:60px" >
 		                        <option value="0">0</option>
 		                        <option value="1">1</option>
 		                        <option value="2">2</option>
@@ -130,30 +130,30 @@
 	                 		<span> 分</span>
 	            		</div>
 	            		</div>
-	        			<div class="row">
+	        		<div class="row">
 						<div class="col-8 text-center">
 			                <p>会社名</p>
 			            </div>
 					</div>
-	            		<div class="form-row text-center">
+	            	<div class="form-row text-center">
 	            		<div  class="col-12">
 	                		<select name ="custmer_cd" id="company" style="width:290px" >
 	                    		<option value=""> </option>
 	                    		<option th:each="customer : ${customerlist}" th:value="*{c_num}" th:text="*{c_name}" th:object="${customer}"></option>
 	               			 </select>
 	            		</div>
-	            		</div>
-	            		<div class="row">
+	            	</div>
+	            	<div class="row">
 						<div class="col-8 text-center">
 			                <p>氏名</p>
 			            </div>
 					</div>
-	            		<div class="form-row text-center">
+	            	<div class="form-row text-center">
 	            		<div  class="col-12">
 	                		<input type="text" name="sender" style="width:290px"  maxlength="40" required="required" >
 	            		</div> 
-	            		</div>
-	        			<div class="row">
+	            	</div>
+	        	    <div class="row">
 						<div class="col-8 text-center">
 			                <p>対応</p>
 			            </div>
@@ -167,16 +167,16 @@
 		                        </ul>
 		               		</div>   
 	               		</div>        
-	            		<div class="form-row text-center">
-		            		<div  class="col-12">
-		                		<textarea id="memo" rows="4" cols="30" name="memo" style="width:310px" readonly required maxlength="256"></textarea>
-		            		</div>
-	            		</div>
-	            		<div class="row">
-							<div class="col-8 text-center">
-				                <p>受電者</p>
-				            </div>
-						</div>
+	            	<div class="form-row text-center">
+		            	<div  class="col-12">
+		                	<textarea id="memo" rows="4" cols="30" name="memo" style="width:310px" readonly required maxlength="256"></textarea>
+		            	</div>
+	            	</div>
+            		<div class="row">
+						<div class="col-8 text-center">
+			                <p>受電者</p>
+			            </div>
+					</div>
 	            		<div class="form-row text-center">
 	            			<div  class="col-11 mb-4">
 		                		<select name ="receiver_cd" id="human2" style="width:200px" required="required">
