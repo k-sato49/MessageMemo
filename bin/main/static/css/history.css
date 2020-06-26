@@ -16,3 +16,78 @@ a:hover { color: white;}
 	margin-top:3%;
 	margin-bottom:2%;
 }
+
+.sticky_table thead th {
+  /* 縦スクロール時に固定する */
+  position: -webkit-sticky;
+  position: sticky;
+  top: -1px;
+  background:green;
+   z-index: -1px;
+}
+
+/* thead.scrollHead,tbody.scrollBody{
+  display:block;
+}
+tbody.scrollBody{
+  overflow-y:scroll;
+  
+} */
+
+/*幅調整*/
+ /* td,th{
+  table-layout:fixed;
+}
+*/
+/* 
+.fixed_header{
+
+}
+
+.fixed_header tbody{
+  display:block;
+  width: 102%;
+  overflow: auto;
+  height: 500px;
+}
+
+.fixed_header thead tr {
+   display: block;
+}
+
+.fixed_header thead {
+  background: black;
+  color:#fff;
+}
+.fixed_header tbody {
+  background: red;
+  color:#fff;
+}
+.fixed_header th, .fixed_header td {
+  padding: 5px;
+  text-align: left;
+}
+.id{
+  width:40px;
+}
+.time{
+  width:200px;
+}
+.name{
+  width:100px;
+}
+.name2{
+  width:330px;
+}
+.name21{
+  width:230px;
+}
+.name22{
+  width:100px;
+}
+.memo{
+  width:245px;
+}
+.send{
+  width:120px;
+}   */

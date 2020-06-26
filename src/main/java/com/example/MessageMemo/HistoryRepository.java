@@ -3,11 +3,25 @@ package com.example.MessageMemo;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.data.jpa.repository.Query;
+import java.util.ArrayList;
 @Repository
 
-public interface HistoryRepository extends CrudRepository<History, String> {
-	//@Query(value="select count(M_ID) from T_MESSAGE",nativeQuery=true)
-   // public int countt_message();
+public interface HistoryRepository extends CrudRepository<History, Integer> {
+	@Query(value="SELECT T_MESSAGE.M_ID AS m_id"
+			+ " ,T_MESSAGE.RECEIV_TIME AS receiv_time"
+			+ " ,T_MESSAGE.TO_NAME AS to_name"
+			+ " ,M_CUSTOMER.C_NAME AS c_name"
+			+ " ,T_MESSAGE.SENDER AS sender"
+			+ " ,T_MESSAGE.MESSAGE_CD AS message_cd"
+			+ " ,M_EMPLOYEE.E_NAME AS e_name"
+			+ " FROM T_MESSAGE"
+			+ " LEFT JOIN M_CUSTOMER"
+			+ " ON T_MESSAGE.CUSTMER_CD = M_CUSTOMER.C_CD"
+			+ " INNER JOIN m_employee"
+			+ " ON T_MESSAGE.RECEIVER_CD = M_EMPLOYEE.E_NUM;"
+			, nativeQuery = true)
+	ArrayList<History> histories();
+   
 }
 
 

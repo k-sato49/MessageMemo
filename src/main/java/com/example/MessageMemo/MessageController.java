@@ -15,6 +15,7 @@ import java.text.SimpleDateFormat;        //SimpleDataFormatクラスをイン�
 import java.text.ParseException; //try-catch構文で使うもの
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
+import java.util.ArrayList;
 
 
 
@@ -29,8 +30,8 @@ private EmployeeRepository employeeRepository;
 private MessageRepository messageRepository;
 	@Autowired
 private MessageRepository rep;
-//	@Autowired
-//private HistoryRepository historyRepository;
+	@Autowired
+private HistoryRepository historyRepository;
 	
 	@RequestMapping("/msgmemo/inputForm")
     
@@ -91,8 +92,8 @@ private MessageRepository rep;
 		
 		//Timestamp型を適切な型に変える
 		try {
-			SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm");
-			String str = today_year + "-" + today_month + "-" + today_day + " " + hour + ":" + minute;
+			SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm");
+			String str = today_year + "/" + today_month + "/" + today_day + " " + hour + ":" + minute;
 			Date date = sdFormat.parse(str);
 			Timestamp ts = new Timestamp(date.getTime());
 			messageAddData.setReceiv_time(ts); 
@@ -128,35 +129,35 @@ private MessageRepository rep;
 		model.addAttribute("employeelist",employeeList);
 		return "memo";
 	}
-	@RequestMapping("/msgmemo/history")
-    public String history() {
-		// データ登録画面を表示
-        return "history";
-    }
+//	@RequestMapping("/msgmemo/history")
+//    public String history() {
+//		// データ登録画面を表示
+//        return "history";
+//    }
 
 	@GetMapping(path="/msgmemo/history") 
 	public String history(Model model) {
 			// M_CUSTOMERテーブルの全データを取得
-		Iterable<Customer> customerList = customerRepository.findAll();
+		//Iterable<Customer> customerList = customerRepository.findAll();
 			
 		// モデルに属性追加
-		model.addAttribute("customerlist",customerList);
+		//model.addAttribute("customerlist",customerList);
 			
 			//M_EMPLOYEEテーブルの全データうを取得
-		Iterable<Employee> employeeList = employeeRepository.findAll();
+		//Iterable<Employee> employeeList = employeeRepository.findAll();
 			
 			// モデルに属性追加
-		model.addAttribute("employeelist",employeeList);
+		//model.addAttribute("employeelist",employeeList);
 		
-		Iterable<Message> messageList = messageRepository.findAll();
+		//Iterable<Message> messageList = messageRepository.findAll();
 		
-		model.addAttribute("messagelist",messageList);
+		//model.addAttribute("messagelist",messageList);
 		
-		//Iterable<History> historyList = HistoryRepository.findAll();
+		ArrayList<History> historyList = historyRepository.histories();
 //		
 //		// モデルに属性追加
-	//model.addAttribute("historylist",historyList);
-		
+	   model.addAttribute("historylist",historyList);
+		//
 	return "history";
 	}
 
